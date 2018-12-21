@@ -1,0 +1,256 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FFFFFF"
+    tools:context="com.grape.basic8086.activity.ExperimentsFragment">
+    
+   <!-- <TextView
+        android:layout_below="@id/label"
+        android:layout_centerInParent="true"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="12dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal"
+        android:text="Edit fragment_friends.xml to change the appearance" />-->
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <Button
+                android:id="@+id/button1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="pro1"
+                android:text="Transfer block of data"
+
+                                                                   android:layout_marginTop="8dp"                 android:background="#FFFFFF"                 android:textColor="#009688"
+                />
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="match_parent"
+                                                                                    android:background="#FFFFFF"                 android:textColor="#009688"
+                android:layout_height="wrap_content" android:onClick="pro2"
+                 
+                android:text="Exchange block of data" />
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="match_parent"
+                                                                                    android:background="#FFFFFF"                 android:textColor="#009688"  
+                android:layout_height="wrap_content" android:onClick="pro3"
+                android:text="Find the largest number" />
+
+            <Button
+                android:id="@+id/button4"
+                android:layout_width="match_parent"
+                                                                                    android:background="#FFFFFF"                 android:textColor="#009688"  
+                android:layout_height="wrap_content" android:onClick="pro4"
+                android:text="Find the smallest number" />
+
+            <Button
+                android:id="@+id/button5"  
+                android:layout_width="match_parent"                                                                     android:background="#FFFFFF"                 android:textColor="#009688"
+                android:layout_height="wrap_content" android:onClick="pro5"
+                android:text="Sort data in ascending order" />
+
+            <Button
+                android:id="@+id/button6"  
+                android:layout_width="match_parent"                                                                     android:background="#FFFFFF"                 android:textColor="#009688"
+                android:layout_height="wrap_content" android:onClick="pro6"
+                android:text="Sort data in descending order" />
+
+            <Button
+                android:id="@+id/button7"  
+                android:layout_width="match_parent"                                                                     android:background="#FFFFFF"                 android:textColor="#009688"
+                android:layout_height="wrap_content" android:onClick="pro7"
+                android:text="Add 2 bytes" />
+
+            <Button
+                android:id="@+id/button8"  
+                android:layout_width="match_parent"                                                                     android:background="#FFFFFF"                 android:textColor="#009688"
+                android:layout_height="wrap_content" android:onClick="pro8"
+                android:text="Add 2 words" />
+
+            <Button
+                android:id="@+id/button9"  
+                android:layout_width="match_parent"                                                                     android:background="#FFFFFF"                 android:textColor="#009688"
+                android:layout_height="wrap_content" android:onClick="pro9"
+                android:text="Subtract 2 bytes" />
+
+            <Button
+                android:id="@+id/button10"  
+                android:layout_width="match_parent"                                                                     android:background="#FFFFFF"                 android:textColor="#009688"
+                android:layout_height="wrap_content" android:onClick="pro10"
+                android:text="Subtract 2 words" />
+
+            <Button
+                android:id="@+id/button11"  
+                android:layout_width="match_parent"                                                                     android:background="#FFFFFF"                 android:textColor="#009688"
+                android:layout_height="wrap_content" android:onClick="pro11"
+                android:text="Multiply 2 bytes" />
+
+            <Button
+                android:id="@+id/button12"  
+                android:layout_width="match_parent"                                                                     android:background="#FFFFFF"                 android:textColor="#009688"
+                android:layout_height="wrap_content" android:onClick="pro12"
+                android:text="Multiply byte with word" />
+
+            <Button
+                android:id="@+id/button13"  
+                android:layout_width="match_parent"                                                                     android:background="#FFFFFF"                 android:textColor="#009688"
+                android:layout_height="wrap_content" android:onClick="pro13"
+                android:text="Multiply 2 words" />
+
+            <Button
+                android:id="@+id/button14"  
+                android:layout_width="match_parent"                                                                     android:background="#FFFFFF"                 android:textColor="#009688"
+                android:layout_height="wrap_content" android:onClick="pro14"
+                android:text="Square a number" />
+
+            <Button
+                android:id="@+id/button15"  
+                android:layout_width="match_parent"                                                                     android:background="#FFFFFF"                 android:textColor="#009688"
+                android:layout_height="wrap_content" android:onClick="pro15"
+                android:text="Cube a number" />
+
+            <Button
+                android:id="@+id/button16"  
+                android:layout_width="match_parent"                                                                     android:background="#FFFFFF"                 android:textColor="#009688"
+                android:layout_height="wrap_content" android:onClick="pro16"
+                android:text="Division of 2 bytes" />
+
+            <Button
+                android:id="@+id/button17"  
+                android:layout_width="match_parent"                                                                     android:background="#FFFFFF"                 android:textColor="#009688"
+                android:layout_height="wrap_content" android:onClick="pro17"
+                android:text="Check for oddness" />
+
+            <Button
+                android:id="@+id/button18"  
+                android:layout_width="match_parent"                                                                     android:background="#FFFFFF"                 android:textColor="#009688"
+                android:layout_height="wrap_content" android:onClick="pro18"
+                android:text="Check for positiveness" />
+
+            <Button
+                android:id="@+id/button19"  
+                android:layout_width="match_parent"                                                                     android:background="#FFFFFF"                 android:textColor="#009688"
+                android:layout_height="wrap_content" android:onClick="pro19"
+                android:text="Count 1's and 0's in a number" />
+
+            <Button
+                android:id="@+id/button20"  
+                android:layout_width="match_parent"                                                                     android:background="#FFFFFF"                 android:textColor="#009688"
+                android:layout_height="wrap_content" android:onClick="pro20"
+                android:text="Generate Fibonacci Series" />
+
+            <Button
+                android:id="@+id/button21"  
+                android:layout_width="match_parent"                                                                     android:background="#FFFFFF"                 android:textColor="#009688"
+                android:layout_height="wrap_content" android:onClick="pro21"
+                android:text="ASCII to unpacked BCD" />
+
+            <Button
+                android:id="@+id/button22"  
+                android:layout_width="match_parent"                                                                     android:background="#FFFFFF"                 android:textColor="#009688"
+                android:layout_height="wrap_content" android:onClick="pro22"
+                android:text="Unpacked BCD to ASCII" />
+
+            <Button
+                android:id="@+id/button23"  
+                android:layout_width="match_parent"                                                                     android:background="#FFFFFF"                 android:textColor="#009688"
+                android:layout_height="wrap_content" android:onClick="pro23"
+                android:text="Packed BCD to ASCII" />
+
+            <Button
+                android:id="@+id/button24"  
+                android:layout_width="match_parent"                                                                     android:background="#FFFFFF"                 android:textColor="#009688"
+                android:layout_height="wrap_content" android:onClick="pro24"
+                android:text="ASCII to packed BCD" />
+
+            <Button
+                android:id="@+id/button25"  
+                android:layout_width="match_parent"                                                                     android:background="#FFFFFF"                 android:textColor="#009688"
+                android:layout_height="wrap_content" android:onClick="pro25"
+                android:text="Hexadecimal to Decimal" />
+
+            <Button
+                android:id="@+id/button26"  
+                android:layout_width="match_parent"                                                                     android:background="#FFFFFF"                 android:textColor="#009688"
+                android:layout_height="wrap_content" android:onClick="pro26"
+                android:text="Decimal to Hexadecimal" />
+
+            <Button
+                android:id="@+id/button27"  
+                android:layout_width="match_parent"                                                                     android:background="#FFFFFF"                 android:textColor="#009688"
+                android:layout_height="wrap_content" android:onClick="pro27"
+                android:text="HEX up/down count" />
+
+            <Button
+                android:id="@+id/button28"  
+                android:layout_width="match_parent"                                                                     android:background="#FFFFFF"                 android:textColor="#009688"
+                android:layout_height="wrap_content" android:onClick="pro28"
+                android:text="BCD up count" />
+
+            <Button
+                android:id="@+id/button29"  
+                android:layout_width="match_parent"                                                                     android:background="#FFFFFF"                 android:textColor="#009688"
+                android:layout_height="wrap_content" android:onClick="pro29"
+                android:text="BCD down count" />
+
+            <Button
+                android:id="@+id/button30"  
+                android:layout_width="match_parent"                                                                     android:background="#FFFFFF"                 android:textColor="#009688"
+                android:layout_height="wrap_content" android:onClick="pro30"
+                android:text="GCD and LCM of 2 numbers" />
+
+            <Button
+                android:id="@+id/button31"  
+                android:layout_width="match_parent"                                                                     android:background="#FFFFFF"                 android:textColor="#009688"
+                android:layout_height="wrap_content" android:onClick="pro31"
+                android:text="Factorial of a number" />
+
+            <Button
+                android:id="@+id/button32"  
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:onClick="pro32"
+                android:text="Generate square wave - 1"
+                                                                                    android:background="#FFFFFF"                 android:textColor="#009688"
+                />
+
+            <Button
+                android:id="@+id/button33"  
+                android:layout_width="match_parent"
+                                                                                    android:background="#FFFFFF"                 android:textColor="#009688"
+                android:layout_height="wrap_content" android:onClick="pro33"
+                android:text="Generate square wave - 2" />
+
+            <Button
+                android:id="@+id/button34"  
+                android:layout_width="match_parent"
+                                                                                    android:background="#FFFFFF"                 android:textColor="#009688"
+                android:layout_height="wrap_content" android:onClick="pro34"
+                android:text="Serially send a byte" />
+
+            <Button
+                android:id="@+id/button35"  
+                android:layout_width="match_parent"
+                android:layout_marginBottom="8dp"                                                                    android:background="#FFFFFF"                 android:textColor="#009688"
+                android:layout_height="wrap_content" android:onClick="pro35"
+                android:text="Realize a Boolean Expression" />
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

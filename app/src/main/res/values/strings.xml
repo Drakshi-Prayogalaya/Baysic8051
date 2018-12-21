@@ -1,0 +1,1670 @@
+<resources>
+    <string name="app_name">NewBasic8051</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="basic8051">Basic 8051</string>
+    <string name="programs">Programs</string>
+    <string name="instruction_set">Instruction Set</string>
+    <string name="instruction">Instruction</string>
+
+    <string-array name="inst_array">
+        <item>ACALL
+        </item>
+        <item> ADD
+        </item>
+        <item> ADDC
+        </item>
+        <item> AJMP
+        </item>
+        <item> ANL
+        </item>
+        <item> CJNE
+        </item>
+        <item> CLR
+        </item>
+        <item> CPL
+        </item>
+        <item> DA
+        </item>
+        <item> DEC
+        </item>
+        <item> DIV
+        </item>
+        <item> JNZ
+        </item>
+        <item> INC
+        </item>
+        <item> JB
+        </item>
+        <item> JBC
+        </item>
+        <item> JC
+        </item>
+        <item> JMP
+        </item>
+        <item> JNB
+        </item>
+        <item> JNC
+        </item>
+        <item> DJNZ
+        </item>
+        <item> JZ
+        </item>
+        <item> LCALL
+        </item>
+        <item> LJMP
+        </item>
+        <item> MOV
+        </item>
+        <item> MOVC
+        </item>
+        <item> MOVX
+        </item>
+        <item> MUL
+        </item>
+        <item> NOP
+        </item>
+        <item> ORL
+        </item>
+        <item> POP
+        </item>
+        <item> PUSH
+        </item>
+        <item> RET
+        </item>
+        <item> RETI
+        </item>
+        <item> RL
+        </item>
+        <item> RLC
+        </item>
+        <item> RR
+        </item>
+        <item> RRC
+        </item>
+        <item> SETB
+        </item>
+        <item> SJMP
+        </item>
+        <item> SUBB
+        </item>
+        <item> SWAP
+        </item>
+        <item> XCH
+        </item>
+        <item> XCHD
+        </item>
+        <item> XRL</item>
+    </string-array>
+
+    <string name="desp_acall">
+        The ACALL instruction calls a subroutine located at the specified address. The PC is incremented twice to obtain the address of the following instruction. The 16-bit PC is then stored on the stack (low-order byte first) and the stack pointer is incremented twice. No flags are affected.\n\n
+        \n
+        The address of the subroutine is calculated by combining the 5 high-order bits of the incremented PC (for A15-A11), the 3 high-order bits of the ACALL instruction opcode (for A10-A8), and the second byte of the instruction (for A7-A0). The subroutine that is called must be located in the same 2KByte block of program memory as the opcode following the ACALL instruction.\n
+        \n
+        Bytes :	2\n
+        Cycles:	2\n
+        \n
+        Encoding: A10A9A810001	A7A6A5A4A3A2A1A0\n
+        \n
+        Operation:\n
+        PC = PC + 2\n
+        SP = SP + 1\n
+        (SP) = PC7-0\n
+        SP = SP + 1\n
+        (SP) = PC15-8\n
+        PC10-0 = A10-0\n
+        \n
+        Example:\n
+        ACALL LABEL\n
+    </string>
+
+    <string name="desp_add">
+        The ADD instruction adds a byte value to the accumulator and stores the results back in the accumulator. Several of the flag registers are affected.\n
+        \n
+        ADD A, #immediate\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        \n
+        Bytes :	2\n
+        Cycles:	1\n
+        \n
+        Encoding: 00100100	immediate\n
+        \n
+        Operation: A = A + immediate\n
+        \n
+        Example: ADD A, #03h\n
+        \n
+        ADD A, @Ri\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        \n
+        Bytes :	1\n
+        Cycles:	1\n
+        \n
+        Encoding: 0010011i\n
+        \n
+        Operation: A = A + (Ri)\n
+        Example: ADD A, @R1\n
+        \n
+        ADD A, direct\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        \n
+        Bytes :	2\n
+        Cycles:	1\n
+        \n
+        Encoding: 00100101	direct\n
+        \n
+        Operation:  A = A + (direct)\n
+        \n
+        Example: ADD A, 20h\n
+        \n
+        ADD A, Rn\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        \n
+        Bytes :	1\n
+        Cycles:	1\n
+        \n
+        Encoding: 00101nnn\n
+        \n
+        Operation: A = A + Rn\n
+        \n
+        Example: ADD A, R0\n
+    </string>
+    <string name="desp_addc">
+        The ADDC instruction adds a byte value and the value of the carry flag to the accumulator. The results of the addition are stored back in the accumulator. Several of the flag registers are affected.\n
+        \n
+        ADDC A, #immediate\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        \n
+        Bytes :	2\n
+        Cycles:	1\n
+        \n
+        Encoding: 00110100	immediate\n
+        \n
+        Operation: A = A + C + immediate\n
+        \n
+        Example: ADDC A, #23h\n
+        \n\n
+        ADDC A, @Ri\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        \n
+        Bytes :	1\n
+        Cycles:	1\n
+        \n
+        Encoding: 0011011i\n
+        \n
+        Operation: A = A + C + (Ri)\n
+        \n
+        Example: ADDC A, @R0\n
+        \n\n
+        ADDC A, direct\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        \n
+        Bytes :	2\n
+        Cycles:	1\n
+        \n
+        Encoding:  00110101		direct\n
+        \n
+        Operation: A = A + C + (direct)\n
+        \n
+        Example: ADDC A, 30h\n
+        \n\n
+        ADDC A, Rn\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        \n
+        Bytes :	1\n
+        Cycles:	1\n
+        \n
+        Encoding: 00111nnn\n
+        \n
+        Operation: A = A + C + Rn\n
+        \n
+        Example: ADDC A, R5\n
+    </string>
+    <string name="desp_ajmp">
+        The AJMP instruction transfers program execution to the specified address. The address is formed by combining the 5 high-order bits of the address of the following instruction (for A15-A11), the 3 high-order bits of the opcode (for A10-A8), and the second byte of the instruction (for A7-A0). The destination address must be located in the same 2KByte block of program memory as the opcode following the AJMP instruction. No flags are affected.\n
+        \n
+        AJMP addr11\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        \n
+        Bytes :	2\n
+        Cycles:	2\n
+        \n
+        Encoding:  A10A9A800001		A7A6A5A4A3A2A1A0\n
+        \n
+        Operation:\n
+        PC = PC + 2\n
+        PC10-0 = A10-0\n
+        \n
+        Example: AJMP LABEL\n
+    </string>
+    <string name="desp_anl">
+        The ANL instruction performs a bitwise logical AND operation between the specified byte or bit operands and stores the result in the destination operand.\n
+        \n
+        Note:\n
+        When this instruction is used to modify an output port, the value used as the port data will be read from the output data latch, not the input pins of the port.\n
+        \n
+        ANL A, #immediate\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        \n
+        Bytes :	2\n
+        Cycles:	1\n
+        \n
+        Encoding: 01010100		immediate\n
+        \n
+        Operation:\n
+        ANL\n
+        A = A AND immediate\n
+        \n
+        Example:  ANL A, #3Fh\n
+        \n\n
+        ANL A, @Ri\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        \n
+        Bytes :	1\n
+        Cycles:	1\n
+        \n
+        Encoding: 0101011i\n
+        \n
+        Operation:\n
+        ANL\n
+        A = A AND (Ri)\n
+        \n
+        Example: ANL A, @R0\n
+        \n\n
+        ANL A, direct\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        \n
+        Bytes :	2\n
+        Cycles:	1\n
+        Encoding: 01010101		direct\n
+        \n
+        Operation:\n
+        ANL\n
+        A = A AND (direct)\n
+        \n
+        Example: ANL A, 40h\n
+        \n\n
+        ANL A, Rn\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        \n
+        Bytes :	1\n
+        Cycles:	1\n
+        \n
+        Encoding: 01011nnn\n
+        Operation:\n
+        ANL\n
+        A = A AND Rn\n
+        \n
+        Example: ANL A, R4\n
+        \n\n
+        ANL C, /bit\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	2\n
+        Cycles:	2\n
+        \n
+        Encoding: 10110000		bit\n
+        \n
+        Operation:\n
+        ANL\n
+        C = C AND NOT (bit)\n
+        \n
+        Example: ANL C, /22h\n
+        \n\n
+        ANL C, bit\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        \n
+        Bytes :	2\n
+        Cycles:	2\n
+        \n
+        Encoding: 10000010		bit\n
+        \n
+        Operation:\n
+        ANL\n
+        C = C AND (bit)\n
+        \n
+        Example: ANL C, 22h\n
+        \n\n
+        ANL direct, A\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        \n
+        Bytes :	2\n
+        Cycles:	1\n
+        \n
+        Encoding: 01010010		direct\n
+        \n
+        Operation:\n
+        ANL\n
+        (direct) = (direct) AND A\n
+        \n
+        Example: ANL 40h, A\n
+        \n\n
+        ANL direct, #immediate\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        \n
+        Bytes :	3\n
+        Cycles:	2\n
+        \n
+        Encoding: 01010011		direct		immediate\n
+        \n
+        Operation:\n
+        ANL\n
+        (direct) = (direct) AND immediate\n
+        \n
+        Example: ANL 30h, #77h\n
+    </string>
+    <string name="desp_cjne">
+        The CJNE instruction compares the first two operands and branches to the specified destination if their values are not equal. If the values are the same, execution continues with the next instruction.\n
+        \n
+        CJNE @Rn, #immediate, offset\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	3\n
+        Cycles:	2\n
+        Encoding:
+        1011011n		immediate		offset\n
+        Operation:\n
+        CJNE\n
+        PC = PC + 3\n
+        IF (Rn) &lt;&gt; immedate\n
+          PC = PC + offset\n
+        IF (Rn) &lt; immediate\n
+          C = 1\n
+        ELSE\n
+          C = 0\n
+        Example:
+        CJNE @R1, #24H, LABEL\n
+        CJNE A, #immediate, offset\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	3\n
+        Cycles:	2\n
+        Encoding:
+        10110100		immediate		offset\n
+        Operation:\n
+        CJNE\n
+        PC = PC + 3\n
+        IF A &lt;&gt; immediate\n
+          PC = PC + offset\n
+        IF A &lt; immediate\n
+          C = 1\n
+        ELSE\n
+          C = 0\n
+        Example:
+        CJNE A, #01H, LABEL\n
+        CJNE A, direct, offset\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	3\n
+        Cycles:	2\n
+        Encoding:
+        10110101		direct		offset\n
+        Operation:\n
+        CJNE\n
+        PC = PC + 3\n
+        IF A &lt;&gt; (direct)\n
+          PC = PC + offset\n
+        IF A &lt; (direct)\n
+          C = 1\n
+        ELSE\n
+          C = 0\n
+        Example:
+        CJNE A, 60h, LABEL\n
+        CJNE Rn, #immediate, offset\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	3\n
+        Cycles:	2\n
+        Encoding:
+        10111nnn		immediate		offset\n
+        Operation:\n
+        CJNE\n
+        PC = PC + 3\n
+        IF Rn &lt;&gt; immedate\n
+          PC = PC + offset\n
+        IF Rn &lt; immediate\n
+          C = 1\n
+        ELSE\n
+          C = 0\n
+        Example:
+        CJNE R6, #12H, LABEL\n
+    </string>
+    <string name="desp_clr">
+        The CLR instruction sets the specified destination operand to a value of 0.\n
+        \n
+        CLR A\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	1\n
+        Cycles:	1\n
+        Encoding:
+        11100100\n
+        Operation:\n
+        CLR\n
+        A = 0\n
+        Example:
+        CLR A\n
+        CLR bit\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	2\n
+        Cycles:	1\n
+        Encoding:
+        11000010		bit\n
+        Operation:\n
+        CLR\n
+        (bit)  = 0\n
+        Example:
+        CLR 01h\n
+        CLR C\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	1\n
+        Cycles:	1\n
+        Encoding:
+        11000011\n
+        Operation:\n
+        CLR\n
+        C = 0\n
+        Example:
+        CLR C\n
+    </string>
+    <string name="desp_cpl">
+        The CPL instruction logically complements the value of the specified destination operand and stores the result back in the destination operand. Bits that previously contained a 1 will be changed to a 0 and bits that previously contained a 0 will be changed to a 1.\n
+        \n
+        CPL A\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	1\n
+        Cycles:	1\n
+        Encoding:
+        11110100\n
+        Operation:\n
+        CPL\n
+        A = NOT A\n
+        Example:
+        CPL A\n
+        CPL bit\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	2\n
+        Cycles:	1\n
+        Encoding:
+        10110010		bit\n
+        Operation:\n
+        CPL\n
+        (bit) = NOT (bit)\n
+        Example:
+        CPL 55h\n
+        CPL C\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	1\n
+        Cycles:	1\n
+        Encoding:
+        10110011\n
+        Operation:\n
+        CPL\n
+        C = NOT C\n
+        Example:
+        CPL C\n
+    </string>
+    <string name="desp_da">
+        The DA instruction adjusts the eight-bit value in the Accumulator resulting from the earlier addition of two variables (each in packed-BCD format), producing two four-bit digits. Any ADD or ADDC instruction may have been used to perform the addition.\n
+
+        If Accumulator bits 3-0 are greater than nine (xxx1010-xxx1111), or if the AC flag is one, six is added to the Accumulator, producing the proper BCD digit in the low-order nibble. This internal addition would set the carry flag if a carry-out of the low-order four-bit field propagated through all high-order bits, but it would not clear the carry flag otherwise.\n
+
+        If the carry flag is now set, or if the four high-order bits now exceed nine (1010xxx-111xxxx), these high-order bits are incremented by six, producing the proper BCD digit in the high-order nibble. Again, this would set the carry flag if there was a carry-out of the high-order bits, but would not clear the carry. The carry flag thus indicates if the sum of the original two BCD variables is greater than 100, allowing multiple precision decimal addition. OV is not affected.\n
+
+        All of this occurs during the one instruction cycle. Essentially, this instruction performs the decimal conversion by adding 00H, 06H, 60H, or 66H to the Accumulator, depending on initial Accumulator and PSW conditions.\n
+
+        Note:\n
+        DA A cannot simply convert a hexadecimal number in the Accumulator to BCD notation, nor does it apply to decimal subtraction.\n
+        \n
+        DA A\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	1\n
+        Cycles:	1\n
+        Encoding:
+        11010100\n
+        Operation:\n
+        DA\n
+        IF (A3-0 > 9) OR (AC = 1)\n
+          A = A + 6\n
+        IF (A7-4 > 9) OR (C = 1)\n
+          A = A + 60h\n
+        Example:
+        DA A\n
+    </string>
+    <string name="desp_dec">
+        The DEC instruction decrements the specified operand by 1. An original value of 00h underflows to 0FFh. No flags are affected by this instruction.\n
+        \n
+        Note:\n
+        When this instruction is used to modify an output port, the value used as the port data is read from the output data latch, not the pins of the port.\n
+        \n\n
+        DEC @Ri\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	1\n
+        Cycles:	1\n
+        Encoding:
+        0001011i\n
+        Operation:\n
+        DEC\n
+        (Ri) = (Ri) - 1\n
+        Example:
+        DEC @R1\n
+        DEC A\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	1\n
+        Cycles:	1\n
+        Encoding:
+        00010100\n
+        Operation:\n
+        DEC\n
+        A = A - 1\n
+        Example:
+        DEC A\n
+        DEC direct\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	2\n
+        Cycles:	1\n
+        Encoding:
+        00010101		direct\n
+        Operation:\n
+        DEC\n
+        (direct) = (direct) - 1\n
+        Example:
+        DEC 35h\n
+        DEC Rn\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	1\n
+        Cycles:	1\n
+        Encoding:
+        00011nnn\n
+        Operation:\n
+        DEC\n
+        Rn = Rn - 1\n
+        Example:
+        DEC R7\n
+    </string>
+    <string name="desp_div">
+        The DIV instruction divides the unsigned 8-bit integer in the accumulator by the unsigned 8-bit integer in register B. After the division, the quotient is stored in the accumulator and the remainder is stored in the B register. The carry and OV flags are cleared.\n
+        \n
+        If the B register begins with a value of 00h the division operation is undefined, the values of the accumulator and B register are undefined after the division, and the OV flag will be set indicating a division-by-zero error.\n
+        \n\n
+        DIV AB\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	1\n
+        Cycles:	4\n
+        Encoding:
+        10000100\n
+        Operation:\n
+        AB = A / B\n
+        Example:
+        DIV AB\n
+    </string>
+    <string name="desp_djnz">
+        The DJNZ instruction decrements the byte indicated by the first operand and, if the resulting value is not zero, branches to the address specified in the second operand.\n
+        \n
+        Note:\n
+        When this instruction is used to modify an output port, the value used as the port data is read from the output data latch, not the input pins of the port.\n
+        \n\n
+        DJNZ direct, offset\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes	3\n
+        Cycles	2\n
+        Encoding:
+        11010101		direct		offset\n
+        Operation:\n
+        DJNZ\n
+        PC = PC + 2\n
+        (direct) = (direct) - 1\n
+        IF (direct) &lt;&gt; 0\n
+          PC = PC + offset\n
+        Example:
+        DJNZ 40h, LABEL\n
+        DJNZ Rn, offset\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes	2\n
+        Cycles	2\n
+        Encoding:
+        11011nnn		offset\n
+        Operation:\n
+        DJNZ\n
+        PC = PC + 2\n
+        Rn = Rn - 1\n
+        IF Rn &lt;&gt; 0\n
+          PC = PC + offset\n
+        Example:
+        DJNZ R6, LABEL\n
+    </string>
+    <string name="desp_inc">
+        The INC instruction increments the specified operand by 1. An original value of 0FFh or 0FFFFh overflows to 00h or 0000h. No flags are affected by this instruction.\n
+        \n
+        Note:\n
+        When this instruction is used to modify an output port, the value used as the port data is read from the output data latch, not the input pins of the port.\n
+        \n
+        \n
+        INC @Ri\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes	1\n
+        Cycles	1\n
+        Encoding:
+        0000011i\n
+        Operation:\n
+        INC\n
+        (Ri) = (Ri) + 1\n
+        Example:
+        INC @R0\n
+        INC A\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes	1\n
+        Cycles	1\n
+        Encoding:
+        00000100\n
+        Operation:\n
+        INC\n
+        A = A + 1\n
+        Example:
+        A = A + 1\n
+        INC direct\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes	2\n
+        Cycles	1\n
+        Encoding:
+        00000101		direct\n
+        Operation:\n
+        INC\n
+        (direct) = (direct) + 1\n
+        Example:
+        INC 34h\n
+        INC DPTR\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes	1\n
+        Cycles	2\n
+        Encoding:
+        10100011\n
+        Operation:\n
+        INC\n
+        DPTR = DPTR + 1\n
+        Example:
+        INC DPTR\n
+        INC Rn\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes	1\n
+        Cycles	1\n
+        Encoding:
+        00001nnn\n
+        Operation:\n
+        INC\n
+        Rn = Rn + 1\n
+        Example:
+        INC Rn\n
+    </string>
+    <string name="desp_jb">
+        The JB instruction branches to the address specified in the second operand if the value of the bit specified in the first operand is 1. The bit that is tested is not modified. No flags are affected by this instruction.\n
+        \n\n
+        JB bit, offset\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes	3\n
+        Cycles	2\n
+        Encoding:
+        00100000		bit		offset\n
+        Operation:\n
+        JB\n
+        PC = PC + 3\n
+        IF (bit) = 1\n
+          PC = PC + offset\n
+        Example:
+        JB P1.2 LABEL\n
+    </string>
+    <string name="desp_jbc">
+        The JBC instruction branches to the address specified in the second operand if the value of the bit specified in the first operand is 1.Otherwise, execution continues with the next instruction.\n
+        \n
+        If the bit specified in the first operand is set, it is cleared. No flags are affected by this instruction.\n
+        \n
+        Note:\n
+        When this instruction is used to modify an output port, the value used as the port data is read from the output data latch, not the input pins of the port.\n
+        \n
+        \n
+        JBC bit, offset\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes	3\n
+        Cycles	2\n
+        Encoding:
+        00010000		bit		offset\n
+        Operation:\n
+        JBC\n
+        PC = PC + 3\n
+        IF (bit) = 1\n
+          (bit) = 0\n
+          PC = PC + offset\n
+        Example:
+        JBC 44h\n
+    </string>
+    <string name="desp_jc">
+        The JC instruction branches to the specified address if the carry flag is set. Otherwise, execution continues with the next instruction. No flags are affected by this instruction.\n
+        \n
+        \n
+        JC offset\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes	2\n
+        Cycles	2\n
+        Encoding:
+        01000000		offset\n
+        Operation:\n
+        JC\n
+        PC = PC + 2\n
+        IF C = 1\n
+          PC = PC + offset\n
+        Example:
+        JC LABEL\n
+    </string>
+    <string name="desp_jmp">
+        The JMP instruction transfers execution to the address generated by adding the 8-bit value in the accumulator to the 16-bit value in the DPTR register. Neither the accumulator nor the DPTR register are altered. No flags are affected by this instruction.\n
+        \n
+        \n
+        JMP @A + DPTR\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes	1\n
+        Cycles	2\n
+        Encoding:
+        01110011\n
+        Operation:\n
+        JMP\n
+        PC = A + DPTR\n
+        Example:
+        JMP @A+DPTR\n
+    </string>
+    <string name="desp_jnb">
+        The JNB instruction branches to the specified address if the specified bit operand has a value of 0. Otherwise, execution continues with the next instruction. No flags are affected by this instruction.\n
+        \n
+        JNB bit, offset\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	3\n
+        Cycles:	2\n
+        Encoding:
+        00110000		bit		offset\n
+        Operation:\n
+        JNB\n
+        PC = PC + 3\n
+        IF (bit) = 0\n
+          PC = PC + offset\n
+        Example:
+        JNB P1.3, LABEL\n
+    </string>
+    <string name="desp_jnc">
+        The JNC instruction transfers program control to the specified address if the carry flag is 0. Otherwise, execution continues with the next instruction. No flags are affected by this instruction.\n
+        \n
+        JNC offset\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	2\n
+        Cycles:	2\n
+        Encoding:
+        01010000		offset\n
+        Operation:\n
+        JNC\n
+        PC = PC + 2\n
+        IF C = 0\n
+          PC = PC + offset\n
+        Example:
+        JNC LABEL\n
+    </string>
+    <string name="desp_jnz">
+        The JNZ instruction transfers control to the specified address if the value in the accumulator is not 0. If the accumulator has a value of 0, the next instruction is executed. Neither the accumulator nor any flags are modified by this instruction.\n
+        \n
+        JNZ offset\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes	2\n
+        Cycles	2\n
+        Encoding:
+        01110000		offset\n
+        Operation:\n
+        JNZ\n
+        PC = PC + 2\n
+        IF A &lt;&gt; 0\n
+          PC = PC + offset\n
+        Example:
+        JNZ LABEL\n
+    </string>
+    <string name="desp_jz">
+        The JZ instruction transfers control to the specified address if the value in the accumulator is 0. Otherwise, the next instruction is executed. Neither the accumulator nor any flags are modified by this instruction.\n
+        \n
+        JZ offset\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	2\n
+        Cycles:	2\n
+        Encoding:
+        01100000		offset\n
+        Operation:\n
+        JZ\n
+        PC = PC + 2\n
+        IF A = 0\n
+          PC = PC + offset\n
+        Example:
+        JZ LABEL\n
+    </string>
+    <string name="desp_lcall">
+        The LCALL instruction calls a subroutine located at the specified address. This instruction first adds 3 to the PC to generate the address of the next instruction. This result is pushed onto the stack low-byte first and the stack pointer is incremented by 2. The high-order and low-order bytes of the PC are loaded from the second and third bytes of the instruction respectively. Program execution is transferred to the subroutine at this address. No flags are affected by this instruction.\n
+        \n
+        LCALL addr16\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	3\n
+        Cycles:	2\n
+        Encoding:
+        00010010		A15-A8		A7-A0\n
+        Operation:\n
+        LCALL\n
+        PC = PC + 3\n
+        SP = SP + 1\n
+        (SP) = PC[7-0]\n
+        SP = SP + 1\n
+        (SP) = PC[15-8]\n
+        PC = addr16\n
+        Example:
+        LCALL SUB1\n
+    </string>
+    <string name="desp_ljmp">
+        The LJMP instruction transfers program execution to the specified 16-bit address. The PC is loaded with the high-order and low-order bytes of the address from the second and third bytes of this instruction respectively. No flags are affected by this instruction.\n
+        \n
+        LJMP addr16\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes	3\n
+        Cycles	2\n
+        Encoding:
+        00000010		A15-A8		A7-A0\n
+        Operation:\n
+        LJMP\n
+        PC = addr16\n
+        Example:
+        LJMP LABEL\n
+    </string>
+    <string name="desp_mov">
+        The MOV instruction moves data bytes between the two specified operands. The byte specified by the second operand is copied to the location specified by the first operand. The source data byte is not affected.\n
+        \n
+        MOV @Rn, #immediate\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	2\n
+        Cycles:	1\n
+        Encoding:
+        0111011n		immediate\n
+        Operation:\n
+        MOV\n
+        (Rn) = immediate\n
+        Example:
+        MOV @R0, #0\n
+        \n
+        MOV @Ri, A\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	1\n
+        Cycles:	1\n
+        Encoding:
+        1111011i\n
+        Operation:\n
+        MOV\n
+        (Ri) = A\n
+        Example:
+        MOV @R0, A\n
+        \n
+        MOV @Ri, direct\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	2\n
+        Cycles:	2\n
+        Encoding:
+        1010011i		direct\n
+        Operation:\n
+        MOV\n
+        (Ri) = (direct)\n
+        Example:
+        MOV @R1, P2\n
+        \n
+        MOV A, #immediate\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	2\n
+        Cycles:	1\n
+        Encoding:
+        01110100		immediate\n
+        Operation:\n
+        MOV\n
+        A = immediate\n
+        Example:
+        MOV A, #0FFh\n
+        \n
+        MOV A, @Ri\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	1\n
+        Cycles:	1\n
+        Encoding:
+        1110011i\n
+        Operation:\n
+        MOV\n
+        A = (Ri)\n
+        Example:
+        MOV A, @R1\n
+        \n
+        MOV A, direct\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	2\n
+        Cycles:	1\n
+        Encoding:
+        11100101		direct\n
+        Operation:\n
+        MOV\n
+        A = (direct)\n
+        Example:
+        MOV A, P0\n
+        \n
+        MOV A, Rn\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	1\n
+        Cycles:	1\n
+        Encoding:
+        11101nnn\n
+        Operation:\n
+        MOV\n
+        A = Rn\n
+        Example:
+        MOV A, R6\n
+        \n
+        MOV bit, C\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	2\n
+        Cycles:	2\n
+        Encoding:
+        10010010		bit\n
+        Operation:\n
+        MOV\n
+        (bit) = C\n
+        Example:
+        MOV 22h, C\n
+        \n
+        MOV C, bit\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	2\n
+        Cycles:	1\n
+        Encoding:
+        10100010		bit\n
+        Operation:\n
+        MOV\n
+        C = (bit)\n
+        Example:
+        MOV C, 22h\n
+        \n
+        MOV dest_direct, src_direct\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	3\n
+        Cycles:	2\n
+        Encoding:
+        10000101		src_direct		dest_direct\n
+        Operation:\n
+        MOV\n
+        (dest_direct) = (src_direct)\n
+        Example:
+        MOV P1, P0\n
+        \n
+        MOV direct, #immediate\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	3\n
+        Cycles:	2\n
+        Encoding:
+        01110101		direct		immediate\n
+        Operation:\n
+        MOV\n
+        (direct) = immediate\n
+        Example:
+        MOV P2, #0FFh\n
+        \n
+        MOV direct, @Rn\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	2\n
+        Cycles:	2\n
+        Encoding:
+        1000011n		direct\n
+        Operation:\n
+        MOV\n
+        (direct) = (Rn)\n
+        Example:
+        MOV P0, @R1\n
+        \n
+        MOV direct, A\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	2\n
+        Cycles:	1\n
+        Encoding:
+        11110101		direct\n
+        Operation:\n
+        MOV\n
+        (direct) = A\n
+        Example:
+        MOV P0, A\n
+        \n
+        MOV direct, Rn\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	2\n
+        Cycles:	2\n
+        Encoding:
+        10001nnn		direct\n
+        Operation:\n
+        MOV\n
+        (direct) = Rn\n
+        Example:
+        MOV P2, R5\n
+        \n
+        MOV DPTR, #immediate\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	3\n
+        Cycles:	2\n
+        Encoding:
+        10010000		immediate15-8		immediate7-0\n
+        Operation:\n
+        MOV\n
+        DPTR = immediate\n
+        Example:
+        MOV DPTR, #1234h\n
+        \n
+        MOV Rn, #immediate\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	2\n
+        Cycles:	1\n
+        Encoding:
+        01111nnn		immediate\n
+        Operation:\n
+        MOV\n
+        Rn = immediate\n
+        Example:
+        MOV R4, #0h\n
+        \n
+        MOV Rn, A\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	1\n
+        Cycles:	1\n
+        Encoding:
+        11111nnn\n
+        Operation:\n
+        MOV\n
+        Rn = A\n
+        Example:
+        MOV R5, A\n
+        \n
+        MOV Rn, direct\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	2\n
+        Cycles:	2\n
+        Encoding:
+        10101nnn		direct\n
+        Operation:\n
+        MOV\n
+        Rn = (direct)\n
+        Example:
+        MOV R4, P1\n
+    </string>
+    <string name="desp_movc">
+        The MOVC instruction moves a byte from the code or program memory to the accumulator\n
+        \n
+        MOVC A, @A+DPTR\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	1\n
+        Cycles:	2\n
+        Encoding:
+        10010011\n
+        Operation:\n
+        MOVC\n
+        A = (A + DPTR)\n
+        Example:
+        MOVC A, @A+DPTR\n
+        \n
+        MOVC A, @A+PC\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	1\n
+        Cycles:	2\n
+        Encoding:
+        10000011\n
+        Operation:\n
+        MOVC\n
+        PC = PC + 1\n
+        A = (A+PC)\n
+        Example:
+        MOV A, @A+PC\n
+    </string>
+    <string name="desp_movx">
+        The MOVX instruction transfers data between the accumulator and external data memory. External memory may be addressed via 16-bits in the DPTR register or via 8-bits in the R0 or R1 registers. When using 8-bit addressing, Port 2 must contain the high-order byte of the address.\n
+        \n
+        MOVX @Ri, A\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	1\n
+        Cycles:	2\n
+        Encoding:
+        1111001i\n
+        Operation:\n
+        MOVX\n
+        (Ri) = A\n
+        Example:
+        MOVX @R0, A\n
+        \n
+        MOVX A, @DPTR\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	1\n
+        Cycles:	2\n
+        Encoding:
+        11100000\n
+        Operation:\n
+        MOVX\n
+        A = (DPTR)\n
+        Example:
+        MOVX A, @DPTR\n
+        \n
+        MOVX A, @Ri\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	1\n
+        Cycles:	2\n
+        Encoding:
+        1110001i\n
+        Operation:\n
+        MOVX\n
+        A = (Ri)\n
+        Example:
+        MOVX A, @R1\n
+    </string>
+    <string name="desp_mul">
+        The MUL instruction multiplies the unsigned 8-bit integer in the accumulator and the unsigned 8-bit integer in the B register producing a 16-bit product. The low-order byte of the product is returned in the accumulator. The high-order byte of the product is returned in the B register. The OV flag is set if the product is greater than 255 (0FFh), otherwise it is cleared. The carry flag is always cleared.\n
+        \n
+        MUL AB\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	1\n
+        Cycles:	4\n
+        Encoding:
+        10100100\n
+        Operation:\n
+        MUL AB\n
+        BA = A * B\n
+        Example:
+        MUL AB\n
+    </string>
+    <string name="desp_nop">
+        The NOP instruction does nothing. Execution continues with the next instruction. No registers or flags are affected by this instruction. NOP is typically used to generate a delay in execution or to reserve space in code memory.\n
+        \n
+        NOP\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	1\n
+        Cycles:	1\n
+        Encoding:
+        00000000\n
+        Operation:\n
+        PC = PC + 1\n
+        Example:
+        NOP\n
+    </string>
+    <string name="desp_orl">
+        The ORL instruction performs a bitwise logical OR operation on the specified operands, the result of which is stored in the destination operand.\n
+        \n
+        Note:\n
+        When this instruction is used to modify an output port, the value used as the port data will be read from the output data latch, not the input pins of the port.\n
+        \n
+        ORL A, #immediate\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	2\n
+        Cycles:	1\n
+        Encoding:
+        01000100		immediate\n
+        Operation:\n
+        ORL\n
+        A = A OR immediate\n
+        Example:
+        ORL A, #01h\n
+        \n
+        ORL A, @Ri\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	1\n
+        Cycles:	1\n
+        Encoding:
+        0100011i\n
+        Operation:\n
+        ORL\n
+        A = A OR (Ri)\n
+        Example:
+        ORL A, @R0\n
+        \n
+        ORL A, direct\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	2\n
+        Cycles:	1\n
+        Encoding:
+        01000101		direct\n
+        Operation:\n
+        ORL\n
+        A = A OR (direct)\n
+        Example:
+        ORL A, P0\n
+        \n
+        ORL A, Rn\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	1\n
+        Cycles:	1\n
+        Encoding:
+        01001nnn\n
+        Operation:\n
+        ORL\n
+        A = A OR Rn\n
+        Example:
+        ORL A, R5\n
+        \n
+        ORL C, /bit\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	2\n
+        Cycles:	2\n
+        Encoding:
+        10100000		bit\n
+        Operation:\n
+        ORL\n
+        C = C OR NOT (bit)\n
+        Example:
+        ORL C, /22h\n
+        \n
+        ORL C, bit\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	2\n
+        Cycles:	2\n
+        Encoding:
+        01110010		bit\n
+        Operation:\n
+        ORL\n
+        C = C OR (bit)\n
+        Example:
+        ORL C, 22h\n
+        \n
+        ORL direct, #immediate\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	3\n
+        Cycles:	2\n
+        Encoding:
+        01000011		direct		immediate\n
+        Operation:\n
+        ORL\n
+        (direct) = (direct) OR immediate\n
+        Example:
+        ORL P0, #01h\n
+        \n
+        ORL direct, A\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	2\n
+        Cycles:	1\n
+        Encoding:
+        01000010		direct\n
+        Operation:\n
+        ORL\n
+        (direct) = (direct) OR A\n
+        Example:
+        ORL P0, A\n
+    </string>
+    <string name="desp_pop">
+        The POP instruction reads a byte from the address indirectly referenced by the SP register. The value read is stored at the specified address and the stack pointer is decremented. No flags are affected by this instruction.\n
+        \n
+        POP direct\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	2\n
+        Cycles:	2\n
+        Encoding:
+        11010000		direct\n
+        Operation:\n
+        POP\n
+        (direct) = (SP)\n
+        SP = SP - 1\n
+        Example:
+        POP 34h\n
+    </string>
+    <string name="desp_push">
+        The PUSH instruction increments the stack pointer and stores the value of the specified byte operand at the internal RAM address indirectly referenced by the stack pointer. No flags are affected by this instruction.\n
+        \n
+        PUSH direct\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	2\n
+        Cycles:	2\n
+        Encoding:
+        11000000		direct\n
+        Operation:\n
+        PUSH\n
+        SP = SP + 1\n
+        (SP) = (direct)\n
+        Example:
+        PUSH A\n
+    </string>
+    <string name="desp_ret">
+        The RET instruction pops the high-order and low-order bytes of the PC from the stack (and decrements the stack pointer by 2). Program execution resumes from the resulting address which is typically the instruction following an ACALL or LCALL instruction. No flags are affected by this instruction.\n
+        \n
+        RET\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	1\n
+        Cycles:	2\n
+        Encoding:
+        00100010\n
+        Operation:\n
+        RET\n
+        PC15-8 = (SP)\n
+        SP = SP - 1\n
+        PC7-0 = (SP)\n
+        SP = SP - 1\n
+        Example:
+        RET\n
+    </string>
+    <string name="desp_reti">
+        The RETI instruction is used to end an interrupt service routine. This instruction pops the high-order and low-order bytes of the PC (and decrements the stack pointer by 2) and restores the interrput logic to accept additional interrupts. No other registers are affected by this instruction.\n
+
+        The RETI instruction does not restore the PSW to its value before the interrupt. The interrupt service routine must save and restore the PSW.\n
+
+        Execution returns to the instruction immediately after the point at which the interrupt was detected. If another interrupt was pending when the RETI instruction is executed, one instruction at the return address is executed before the pending interrupt is processed.\n
+        \n
+        RETI\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	1\n
+        Cycles:	2\n
+        Encoding:
+        00110010\n
+        Operation:\n
+        RETI\n
+        PC15-8 = (SP)\n
+        SP = SP - 1\n
+        PC7-0 = (SP)\n
+        SP = SP - 1\n
+        Example:
+        RETI\n
+    </string>
+    <string name="desp_rl">
+        The RL instruction rotates the eight bits in the accumulator left one bit position. Bit 7 of the accumulator is rotated into bit 0, bit 0 into bit 1, bit 1 into bit 2, and so on. No flags are affected by this instruction.\n
+        \n
+        RL A\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	1\n
+        Cycles:	1\n
+        Encoding:
+        00100011\n
+        Operation:\n
+        RL\n
+        An+1 = An WHERE n = 0 TO 6\n
+        A0 = A7\n
+        Example:
+        RL A\n
+    </string>
+    <string name="desp_rlc">
+        The RLC instruction rotates the eight bits in the accumulator and the one bit in the carry flag left one bit position. Bit 7 of the accumulator is rotated into the carry flag while the original value of the carry flag is rotated into bit 0 of the accumulator. Bit 0 of the accumulator is rotated into bit 1, bit 1 into bit 2, and so on. No other flags are affected by this operation.\n
+        \n
+        RLC A\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	1\n
+        Cycles:	1\n
+        Encoding:
+        00110011\n
+        Operation:\n
+        RLC\n
+        An+1 = AN WHERE N = 0 TO 6\n
+        A0 = C\n
+        C = A7\n
+        Example:
+        RLC A\n
+    </string>
+    <string name="desp_rr">
+        The RR instruction rotates the eight bits in the accumulator right one bit position. Bit 0 of the accumulator is rotated into bit 7, bit 7 into bit 6, and so on. No flags are affected by this instruction.\n
+        \n
+        RR A\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	1\n
+        Cycles:	1\n
+        Encoding:
+        00000011\n
+        Operation:\n
+        RR\n
+        An = An+1 where n = 0 to 6\n
+        A7 = A0\n
+        Example:
+        RR A\n
+    </string>
+    <string name="desp_rrc">
+        The RRC instruction rotates the eight bits in the accumulator and the one bit in the carry flag right one bit position. Bit 0 of the accumulator is rotated into the carry flag while the original value of the carry flag is rotated in to bit 7 of the accumulator. Bit 7 of the accumulator is rotated into bit 6, bit 6 into bit 5, and so on. No other flags are affected by this instruction.\n
+        \n
+        RRC A\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	1\n
+        Cycles:	1\n
+        Encoding:
+        00010011\n
+        Operation:\n
+        RRC\n
+        An = An+1 where n = 0 to 6\n
+        A7 = C\n
+        C = A0\n
+        Example:
+        RRC A\n
+    </string>
+    <string name="desp_setb">
+        The SETB instruction sets the bit operand to a value of 1. This instruction can operate on the carry flag or any other directly addressable bit. No flags are affected by this instruction.\n
+        \n
+        SETB bit\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	2\n
+        Cycles:	1\n
+        Encoding:
+        11010010		bit\n
+        Operation:\n
+        SETB\n
+        (bit) = 1\n
+        Example:
+        SETB 63h\n
+        \n
+        SETB C\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	1\n
+        Cycles:	1\n
+        Encoding:
+        11010011\n
+        Operation:\n
+        SETB\n
+        C = 1\n
+        Example:
+        SETB C\n
+    </string>
+    <string name="desp_sjmp">
+        The SJMP instruction transfers execution to the specified address. The address is calculated by adding the signed relative offset in the second byte of the instruction to the address of the following instruction. The range of destination addresses is from 128 before the next instruction to 127 bytes after the next instruction.\n
+        \n
+        SJMP offset\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	2\n
+        Cycles:	2\n
+        Encoding:
+        10000000		offset\n
+        Operation:\n
+        SJMP\n
+        PC = PC + 2\n
+        PC = PC + offset\n
+        Example:
+        SJMP LABEL\n
+    </string>
+    <string name="desp_subb">
+        The SUBB instruction subtracts the specified byte variable and the carry flag from the accumulator. The result is stored in the accumulator. This instruction sets the carry flag if a borrow is required for bit 7 of the result. If no borrow is required, the carry flag is cleared.\n
+        \n
+        SUBB A, #immediate\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	2\n
+        Cycles:	1\n
+        Encoding:
+        10010100		immediate\n
+        Operation:\n
+        SUBB\n
+        A = A - C - immediate\n
+        Example:
+        SUBB A, #01h\n
+        \n
+        SUBB A, @Ri\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	1\n
+        Cycles:	1\n
+        Encoding:
+        1001011i\n
+        Operation:\n
+        SUBB\n
+        A = A - C - (Ri)\n
+        Example:
+        SUBB A, @R1\n
+        \n
+        SUBB A, direct\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	2\n
+        Cycles:	1\n
+        Encoding:
+        10010101		direct\n
+        Operation:\n
+        SUBB\n
+        A = A - C - (direct)\n
+        Example:
+        SUBB A, 44h\n
+        \n
+        SUBB A, Rn\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	1\n
+        Cycles:	1\n
+        Encoding:
+        10011nnn\n
+        Operation:\n
+        SUBB\n
+        A = A - C - Rn\n
+        Example:
+        SUBB A, R5\n
+    </string>
+    <string name="desp_swap">
+        The SWAP instruction exchanges the low-order and high-order nibbles within the accumulator. No flags are affected by this instruction.\n
+        \n
+        SWAP A\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	1\n
+        Cycles:	1\n
+        Encoding:
+        11000100\n
+        Operation:\n
+        SWAP\n
+        A3-0 swap A7-4\n
+        Example:
+        SWAP A\n
+    </string>
+    <string name="desp_xch">
+        The XCH instruction loads the accumulator with the byte value of the specified operand while simultaneously storing the previous contents of the accumulator in the specified operand.\n
+        \n
+        XCH A, @Ri\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	1\n
+        Cycles:	1\n
+        Encoding:
+        1100011i\n
+        Operation:\n
+        XCH\n
+        A swap (Ri)\n
+        Example:
+        XCH A, @R0\n
+        \n
+        XCH A, direct\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	2\n
+        Cycles:	1\n
+        Encoding:
+        11000101		direct\n
+        Operation:\n
+        XCH\n
+        A swap (direct)\n
+        Example:
+        XCH A, 45h\n
+        \n
+        XCH A, Rn\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	1\n
+        Cycles:	1\n
+        Encoding:
+        11001nnn\n
+        Operation:\n
+        XCH\n
+        A swap Rn\n
+        Example:
+        XCH A, R6\n
+    </string>
+    <string name="desp_xchd">
+        The XCHD instruction exchanges the low-order nibble of the accumulator with the low-order nibble of the specified internal RAM location. The internal RAM is accessed indirectly through R0 or R1. The high-order nibbles of each operand are not affected.\n
+        \n
+        XCHD A, @Ri\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	1\n
+        Cycles:	1\n
+        Encoding:
+        1101011i\n
+        Operation:\n
+        XCHD\n
+        A3-0 swap (Ri)3-0\n
+        Example:
+        XCHD A, @R1\n
+    </string>
+    <string name="desp_xrl">
+        The XRL instruction performs a logical exclusive OR operation between the specified operands. The result is stored in the destination operand.\n
+        \n
+        Note:\n
+        When this instruction is used to modify an output port, the value used as the port data is read from the output data latch, not the pins of the port.\n
+        \n
+        XRL A, #immediate\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	2\n
+        Cycles:	1\n
+        Encoding:
+        01100100		immediate\n
+        Operation:\n
+        XRL\n
+        A = A XOR immediate\n
+        Example:
+        XRL A, #0FFh\n
+        \n
+        XRL A, @Ri\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	1\n
+        Cycles:	1\n
+        Encoding:
+        0110011i\n
+        Operation:\n
+        XRL\n
+        A = A XOR (Ri)\n
+        Example:
+        XRL A, @R0\n
+        \n
+        XRL A, direct\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	2\n
+        Cycles:	1\n
+        Encoding:
+        01100101		direct\n
+        Operation:\n
+        XRL\n
+        A = A XOR (direct)\n
+        Example:
+        XRL A, 34h\n
+        \n
+        XRL A, Rn\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	1\n
+        Cycles:	1\n
+        Encoding:
+        01101nnn\n
+        Operation:\n
+        XRL\n
+        A = A XOR Rn\n
+        Example:
+        XRL A, R7\n
+        \n
+        XRL direct, #immediate\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	3\n
+        Cycles:	2\n
+        Encoding:
+        01100011		direct		immediate\n
+        Operation:\n
+        XRL\n
+        (direct) = (direct) XOR immediate\n
+        Example:
+        XRL 34H, #0FFh\n
+        \n
+        XRL direct, A\n
+        C	AC	F0	RS1	RS0	OV	 	P\n
+        Bytes :	2\n
+        Cycles:	1\n
+        Encoding:
+        01100010		direct\n
+        Operation:\n
+        XRL\n
+        (direct) = (direct) XOR A\n
+        Example:
+        XRL 34h, A\n
+    </string>
+</resources>

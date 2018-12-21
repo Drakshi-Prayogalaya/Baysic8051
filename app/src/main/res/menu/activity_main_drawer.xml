@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/menu_main_home"
+            android:icon="@drawable/ic_home"
+            android:title="Home" />
+        <item
+            android:id="@+id/menu_programs"
+            android:icon="@drawable/ic_action_view_as_list"
+            android:title="Programs" />
+        <item
+            android:id="@+id/menu_instructions"
+            android:icon="@drawable/ic_list_ingredients"
+            android:title="Instruction Set" />
+        <item
+            android:id="@+id/menu_about_us"
+            android:icon="@drawable/ic_action_about"
+            android:title="About Us" />
+    </group>
+
+    <item android:title="Social">
+        <menu>
+            <item
+                android:id="@+id/menu_share"
+                android:icon="@drawable/ic_action_share"
+                android:title="Share" />
+            <item
+                android:id="@+id/menu_facebook"
+                android:icon="@drawable/ic_facebook"
+                android:title="Like us on Facebook" />
+
+            <item
+                android:id="@+id/menu_more_apps"
+                android:icon="@drawable/ic_google_play"
+                android:title="More Apps by Us" />
+
+            <item
+                android:id="@+id/menu_rate_the_app"
+                android:icon="@drawable/ic_rate_us"
+                android:title="Rate this app" />
+
+            <item
+                android:id="@+id/menu_visit_our_site"
+                android:icon="@drawable/ic_action_web_site"
+                android:title="Visit our Website" />
+
+            <item
+                android:id="@+id/menu_twitter"
+                android:icon="@drawable/ic_twitter"
+                android:title="Follow us on Twitter" />
+        </menu>
+    </item>
+
+</menu>
